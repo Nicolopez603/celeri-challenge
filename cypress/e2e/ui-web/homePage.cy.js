@@ -1,34 +1,34 @@
 /// <reference types="cypress" />
+import homePage from "../../support/pages/homePage";
 
-describe("Test Suit Home Page", () => {
+describe("Test Suite de la Pagina principal", () => {
   beforeEach(function () {
     cy.visit("/");
+    cy.location("protocol").should("contains", "https");
   });
 
   it("Validamos que los elementos importantes sean visibles", function () {
-    cy.get("img").should("be.visible");
-    cy.get("h4")
+    homePage.elements.imgCeleri().should("be.visible");
+
+    homePage.elements
+      .msgWelcome()
       .contains("Bienvenida/o al Onboarding Digital")
       .should("be.visible");
-    cy.botonHumana().should("be.visible");
-    cy.botonJuridica().should("be.visible");
+
+    homePage.elements.botonHumana().should("be.visible");
+
+    homePage.elements.botonJuridica().should("be.visible");
   });
 
-  it("Validamos que el boton Humana funcione correctamente", function () {
-    cy.botonHumana().click();
-    cy.get("h6").contains("persona humana").should("be.visible");
-    cy.url().then((url) => {
-      cy.log(url);
-      expect(url).to.contains("/human");
-    });
+  it("Validamos que el boton 'Humana' nos redireccione correctamente", function () {
+    homePage.elements.botonHumana().click();
+
+    cy.location("pathname").should("contains", "/human");
   });
 
-  it("Validamos que el boton Juridica funcione correctamente", function () {
-    cy.botonJuridica().click();
-    cy.get("h6").contains("persona jurídica").should("be.visible");
-    cy.url().then((url) => {
-      cy.log(url);
-      expect(url).to.contains("/legal");
-    });
+  it("Validamos que el boton 'Juridica' nos redireccione correctamente", function () {
+    homePage.elements.botonJuridica().click();
+
+    cy.location("pathname").should("contains", "/legal");
   });
 });

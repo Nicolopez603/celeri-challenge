@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe("Test Suit Home Page", () => {
+describe("Test Suit de la pagina Humana", () => {
   beforeEach(function () {
     cy.visit("/human");
   });
@@ -28,7 +28,7 @@ describe("Test Suit Home Page", () => {
     cy.get(".MuiButton-root").contains("Soporte").should("be.visible");
   });
 
-  it("Agregamos validamos que el boton 'Agregar' de Titulares funcione correctamente", function () {
+  it("validamos que el boton 'Agregar' de Titulares funcione correctamente", function () {
     cy.get(".MuiButton-root").contains("Agregar").click();
     cy.get('.MuiTypography-h4').contains('Instrucciones').should("be.visible");
   });

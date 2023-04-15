@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe("Test Suit Home Page", () => {
+describe("Test Suit Pagina de Titulares", () => {
   beforeEach(function () {
     cy.visit("human/owners");
   });
@@ -26,8 +26,6 @@ describe("Test Suit Home Page", () => {
       ":nth-child(2) > .MuiFormControl-root > .MuiFormGroup-root > :nth-child(2) > .MuiRadio-root > .PrivateSwitchBase-input"
     ).check();
 
-    cy.get('[data-testid="ArrowDropDownIcon"]').first().click();
-
     cy.get('input[name="addresses[0].zip_code"]').type("1900");
     cy.get('input[name="addresses[0].city"]').type("La Plata");
     cy.get('input[name="addresses[0].street"]').type("155");
@@ -35,6 +33,15 @@ describe("Test Suit Home Page", () => {
       ":nth-child(4) > :nth-child(2) > .MuiGrid-container > .MuiGrid-root > .flex > .MuiAutocomplete-root > .MuiFormControl-root > .MuiOutlinedInput-root"
     ).type("Jubilado");
 
-    cy.get(':nth-child(9) > .flex > .MuiAutocomplete-root > .MuiFormControl-root > .MuiOutlinedInput-root').click().first().click()
+    cy.get(
+      ":nth-child(9) > .flex > .MuiAutocomplete-root > .MuiFormControl-root > .MuiOutlinedInput-root"
+    )
+      .click()
+      .first()
+      .click();
+
+    cy.get(
+      ":nth-child(10) > .flex > .MuiAutocomplete-root > .MuiFormControl-root > .MuiOutlinedInput-root > .MuiAutocomplete-endAdornment > .MuiButtonBase-root"
+    ).type("Masculino{enter}");
   });
 });
