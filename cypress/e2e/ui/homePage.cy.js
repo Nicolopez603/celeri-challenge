@@ -7,7 +7,7 @@ describe("Test Suite de la Pagina principal", () => {
     cy.location("protocol").should("contains", "https");
   });
 
-  it("Validamos que los elementos importantes sean visibles", function () {
+  it("Validamos que los elementos principales sean visibles", function () {
     paginaPrincipal.elements.imgCeleri().should("be.visible");
 
     paginaPrincipal.elements

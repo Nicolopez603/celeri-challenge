@@ -8,7 +8,7 @@ describe("Test Suit de la pagina Humana", () => {
     cy.location("protocol").should("contains", "https");
   });
 
-  it("Validamos que los elementos importantes sean visibles", function () {
+  it("Validamos que los elementos principales sean visibles", function () {
     paginaHumana.elements.imgCeleri().should("be.visible");
 
     paginaHumana.elements.textoTitulares().should("be.visible");
@@ -28,7 +28,7 @@ describe("Test Suit de la pagina Humana", () => {
     cy.location("pathname").should("contains", "/human/owners");
   });
 
-  it("Validamos que las alertas de campos requeridos seann visibles", function () {
+  it("Validamos que las alertas de campos requeridos sean visibles", function () {
     const alertSelector = ".MuiAlert-message";
 
     const alertMessages = [
