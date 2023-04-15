@@ -1,35 +1,44 @@
 /// <reference types="cypress" />
 
+import paginaHumana from "../../support/pages/paginaHumana";
+
 describe("Test Suit de la pagina Humana", () => {
   beforeEach(function () {
     cy.visit("/human");
+    cy.location("protocol").should("contains", "https");
   });
 
   it("Validamos que los elementos importantes sean visibles", function () {
-    cy.get("img").should("be.visible");
-    cy.get(".css-fvuq4y > .MuiButton-root").should("be.visible");
-    cy.get("h5").contains("Titulares").should("be.visible");
-    cy.get(".MuiAlert-message")
-      .contains("Se necesita al menos un titular para abrir una cuenta.")
-      .should("be.visible");
-    cy.get(".MuiAlert-message")
-      .contains(
-        "Se necesita al menos una cuenta bancaria para abrir una cuenta."
-      )
-      .should("be.visible");
-    cy.get(".MuiAlert-message")
-      .contains("Debe completar el perfil del inversor.")
-      .should("be.visible");
-    cy.get("button").contains("Agregar").should("be.visible");
-    cy.get("h5").contains("Términos y Condiciones").should("be.visible");
-    cy.get(".MuiTypography-root")
-      .contains("El formulario está incompleto")
-      .should("be.visible");
-    cy.get(".MuiButton-root").contains("Soporte").should("be.visible");
+    paginaHumana.elements.imgCeleri().should("be.visible");
+
+    paginaHumana.elements.textoTitulares().should("be.visible");
+
+    paginaHumana.elements.botonAgregar().should("be.visible");
+
+    paginaHumana.elements.textoTerminosYCondiciones().should("be.visible");
+
+    paginaHumana.elements.botonSoporte().should("be.visible");
+
+    paginaHumana.elements.botonFormularioIncompleto().should("be.visible");
   });
 
-  it("validamos que el boton 'Agregar' de Titulares funcione correctamente", function () {
-    cy.get(".MuiButton-root").contains("Agregar").click();
-    cy.get('.MuiTypography-h4').contains('Instrucciones').should("be.visible");
+  it("Validamos que el boton 'Agregar' de Titulares funcione correctamente", function () {
+    paginaHumana.elements.botonAgregar().click();
+
+    cy.location("pathname").should("contains", "/human/owners");
+  });
+
+  it("Validamos que las alertas de campos requeridos seann visibles", function () {
+    const alertSelector = ".MuiAlert-message";
+
+    const alertMessages = [
+      "Se necesita al menos un titular para abrir una cuenta.",
+      "Se necesita al menos una cuenta bancaria para abrir una cuenta.",
+      "Debe completar el perfil del inversor.",
+    ];
+
+    alertMessages.forEach((message) => {
+      cy.contains(alertSelector, message).should("be.visible");
+    });
   });
 });

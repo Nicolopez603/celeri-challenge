@@ -1,4 +1,4 @@
-class homePage {
+class paginaPrincipal {
   elements = {
     imgCeleri: () => cy.get("img"),
     msgWelcome : () => cy.get("h4"),
@@ -7,4 +7,4 @@ class homePage {
   };
 }
 
-export default new homePage();
+export default new paginaPrincipal();
