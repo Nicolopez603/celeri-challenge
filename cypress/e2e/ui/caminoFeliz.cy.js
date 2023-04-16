@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 import paginaPrincipal from "../../support/pages/paginaPrincipal";
 import paginaHumana from "../../support/pages/paginaHumana";
+import paginaTitulares from "../../support/pages/paginaTitulares";
 
 describe("Test Suite del camino Feliz", () => {
   beforeEach(function () {
@@ -20,35 +21,37 @@ describe("Test Suite del camino Feliz", () => {
 
     //Tercera Pagina
 
-    cy.get('input[name="id_number"]').type(Cypress.env("user_dni"), {
+    paginaTitulares.elements.inputDni().type(Cypress.env("user_dni"), {
       log: false,
     });
-    cy.get('input[name="tax_id_number"]').type(Cypress.env("user_cuit"), {
-      log: false,
-    });
-    cy.get('input[name="first_name"]').type("Nicolas");
-    cy.get('input[name="last_name"]').type("Lopez");
-    cy.get('input[name="middle_name"]').type("Matias");
-    cy.get('input[name="phone"]').type(Cypress.env("user_telefono"), {
-      log: false,
-    });
-    cy.get('input[name="email"]').type(Cypress.env("user_mail"), {
-      log: false,
-    });
-    cy.get(
-      ":nth-child(1) > .MuiFormControl-root > .MuiFormGroup-root > :nth-child(2) > .MuiRadio-root > .PrivateSwitchBase-input"
-    ).check();
-    cy.get(
-      ":nth-child(3) > .MuiFormControl-root > .MuiFormGroup-root > :nth-child(2) > .MuiRadio-root > .PrivateSwitchBase-input"
-    ).check();
-    cy.get(
-      ":nth-child(2) > .MuiFormControl-root > .MuiFormGroup-root > :nth-child(2) > .MuiRadio-root > .PrivateSwitchBase-input"
-    ).check();
 
-    cy.get('input[name="addresses[0].zip_code"]').type("1900");
-    cy.get('input[name="addresses[0].city"]').type("La Plata");
-    cy.get('input[name="addresses[0].street"]').type("155");
+    paginaTitulares.elements.inputCuit().type(Cypress.env("user_cuit"), {
+      log: false,
+    });
 
+    paginaTitulares.elements.inputPrimerNombre().type("Nicolas");
+
+    paginaTitulares.elements.inputSegundoNombre().type("Matias");
+
+    paginaTitulares.elements.inputApellido().type("Lopez");
+
+    paginaTitulares.elements
+      .inputTelefono()
+      .type(Cypress.env("user_telefono"), {
+        log: false,
+      });
+    paginaTitulares.elements.inputMail().type(Cypress.env("user_mail"), {
+      log: false,
+    });
+    cy.get('[name="es_pep"][value="false"]').check().should("be.checked");
+
+    cy.get('[name="es_fatca"][value="false"]').check().should("be.checked");
+
+    cy.get('[name="es_soi"][value="false"]').check().should("be.checked");
+
+    paginaTitulares.elements.inputCodigoPostal().type("1900");
+    paginaTitulares.elements.inputCiudad().type("La Plata");
+    paginaTitulares.elements.inputDireccionCalle().type("155");
     //Genero
     cy.get(
       ":nth-child(9) > .flex > .MuiAutocomplete-root > .MuiFormControl-root > .MuiOutlinedInput-root"

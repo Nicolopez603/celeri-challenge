@@ -1,4 +1,5 @@
 /// <reference types="cypress" />
+import paginaTitulares from "../../support/pages/paginaTitulares";
 
 describe("Test SuitE Pagina de Titulares", () => {
   beforeEach(function () {
@@ -7,26 +8,37 @@ describe("Test SuitE Pagina de Titulares", () => {
   });
 
   it("Camino feliz de apertura de cuenta", () => {
-    cy.get('input[name="id_number"]').type("42028075{enter}");
-    cy.get('input[name="tax_id_number"]').type("20-42028075-1{enter}");
-    cy.get('input[name="first_name"]').type("Nicolas");
-    cy.get('input[name="last_name"]').type("Lopez");
-    cy.get('input[name="middle_name"]').type("Matias");
-    cy.get('input[name="phone"]').type("2213163549");
-    cy.get('input[name="email"]').type("nicomlopez3@gmail.com");
-    cy.get(
-      ":nth-child(1) > .MuiFormControl-root > .MuiFormGroup-root > :nth-child(2) > .MuiRadio-root > .PrivateSwitchBase-input"
-    ).check();
-    cy.get(
-      ":nth-child(3) > .MuiFormControl-root > .MuiFormGroup-root > :nth-child(2) > .MuiRadio-root > .PrivateSwitchBase-input"
-    ).check();
-    cy.get(
-      ":nth-child(2) > .MuiFormControl-root > .MuiFormGroup-root > :nth-child(2) > .MuiRadio-root > .PrivateSwitchBase-input"
-    ).check();
+    paginaTitulares.elements.inputDni().type(Cypress.env("user_dni"), {
+      log: false,
+    });
+    
+    paginaTitulares.elements.inputCuit().type(Cypress.env("user_cuit"), {
+      log: false,
+    });
+    
+    paginaTitulares.elements.inputPrimerNombre().type("Nicolas");
+    
+    paginaTitulares.elements.inputSegundoNombre().type("Matias");
+    
+    paginaTitulares.elements.inputApellido().type("Lopez");
+    
+    paginaTitulares.elements
+      .inputTelefono()
+      .type(Cypress.env("user_telefono"), {
+        log: false,
+      });
+    paginaTitulares.elements.inputMail().type(Cypress.env("user_mail"), {
+      log: false,
+    });
+    cy.get('[name="es_pep"][value="false"]').check().should("be.checked");
 
-    cy.get('input[name="addresses[0].zip_code"]').type("1900");
-    cy.get('input[name="addresses[0].city"]').type("La Plata");
-    cy.get('input[name="addresses[0].street"]').type("155");
+    cy.get('[name="es_fatca"][value="false"]').check().should("be.checked");
+
+    cy.get('[name="es_soi"][value="false"]').check().should("be.checked");
+
+    paginaTitulares.elements.inputCodigoPostal().type("1900");
+    paginaTitulares.elements.inputCiudad().type("La Plata");
+    paginaTitulares.elements.inputDireccionCalle().type("155");
 
     //Genero
     cy.get(
@@ -80,7 +92,7 @@ describe("Test SuitE Pagina de Titulares", () => {
       ":nth-child(4) > :nth-child(2) > .MuiGrid-container > .MuiGrid-root > .flex > .MuiAutocomplete-root > .MuiFormControl-root > .MuiOutlinedInput-root"
     ).type("Venta al por mayor de azúcar");
 
-    cy.wait(500)
+    cy.wait(500);
 
     cy.get(
       ".MuiAutocomplete-popper .MuiAutocomplete-listbox > :first-child"
