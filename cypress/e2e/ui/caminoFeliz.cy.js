@@ -7,6 +7,9 @@ describe("Test Suite del camino Feliz", () => {
   beforeEach(function () {
     cy.visit("/");
     cy.location("protocol").should("contains", "https");
+    cy.fixture("/credencialesUsuario").then((credenciales) => {
+      this.credenciales = credenciales;
+    });
   });
 
   it("Validamos que los elementos principales sean visibles", function () {
@@ -29,11 +32,16 @@ describe("Test Suite del camino Feliz", () => {
       log: false,
     });
 
-    paginaTitulares.elements.inputPrimerNombre().type("Nicolas");
+    //Type Nombre
+    paginaTitulares.elements.inputPrimerNombre().type(this.credenciales.nombre);
 
-    paginaTitulares.elements.inputSegundoNombre().type("Matias");
+    //Type Segundo Nombre
+    paginaTitulares.elements
+      .inputSegundoNombre()
+      .type(this.credenciales.segundoNombre);
 
-    paginaTitulares.elements.inputApellido().type("Lopez");
+    //Type Apellido
+    paginaTitulares.elements.inputApellido().type(this.credenciales.apellido);
 
     paginaTitulares.elements
       .inputTelefono()
@@ -43,15 +51,33 @@ describe("Test Suite del camino Feliz", () => {
     paginaTitulares.elements.inputMail().type(Cypress.env("user_mail"), {
       log: false,
     });
-    cy.get('[name="es_pep"][value="false"]').check().should("be.checked");
 
-    cy.get('[name="es_fatca"][value="false"]').check().should("be.checked");
+    //Checkbox PoliticamenteExpuesta
+    paginaTitulares.elements.checkBoxPoliticamenteExpuesta()
+      .check()
+      .should("be.checked");
 
-    cy.get('[name="es_soi"][value="false"]').check().should("be.checked");
+    //Residente Fiscal de los EEUU
+    paginaTitulares.elements
+      .checkBoxResidenteFiscalUSA()
+      .check()
+      .should("be.checked");
 
-    paginaTitulares.elements.inputCodigoPostal().type("1900");
-    paginaTitulares.elements.inputCiudad().type("La Plata");
-    paginaTitulares.elements.inputDireccionCalle().type("155");
+    //Checkbox Sujeto Obligado
+    paginaTitulares.elements
+      .checkBoxSujetoObligado()
+      .check()
+      .should("be.checked");
+
+    //cy.step('Ingresamos codigo postal, ciudad y cireccion de calle')
+    paginaTitulares.elements
+      .inputCodigoPostal()
+      .type(this.credenciales.codigoPostal);
+    paginaTitulares.elements.inputCiudad().type(this.credenciales.ciudad);
+    paginaTitulares.elements
+      .inputDireccionCalle()
+      .type(this.credenciales.direccionCalle);
+
     //Genero
     cy.get(
       ":nth-child(9) > .flex > .MuiAutocomplete-root > .MuiFormControl-root > .MuiOutlinedInput-root"
