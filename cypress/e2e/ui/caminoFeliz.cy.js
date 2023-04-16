@@ -3,11 +3,11 @@ import paginaPrincipal from "../../support/pages/paginaPrincipal";
 import paginaHumana from "../../support/pages/paginaHumana";
 import paginaTitulares from "../../support/pages/paginaTitulares";
 
-const userEmail = Cypress.env("USER_MAIL");
-const userDni = Cypress.env("USER_DNI");
-const userCuit = Cypress.env("USER_CUIT");
-const userTelefono = Cypress.env("USER_TELEFONO");
-const userCbu = Cypress.env("USER_CBU");
+const userEmail = Cypress.config("env").USER_MAIL;
+const userDni = Cypress.config("env").USER_DNI;
+const userCuit = Cypress.config("env").USER_CUIT;
+const userTelefono = Cypress.config("env").USER_TELEFONO;
+const userCbu = Cypress.config("env").USER_CBU;
 
 describe("Test Suite del camino Feliz", () => {
   beforeEach(function () {
@@ -30,11 +30,11 @@ describe("Test Suite del camino Feliz", () => {
 
     //Tercera Pagina
 
-    paginaTitulares.elements.inputDni().type(Cypress.env("USER_DNI"), {
+    paginaTitulares.elements.inputDni().type(userDni, {
       log: false,
     });
 
-    paginaTitulares.elements.inputCuit().type(Cypress.env("USER_CUIT"), {
+    paginaTitulares.elements.inputCuit().type(userCuit, {
       log: false,
     });
 
@@ -49,12 +49,11 @@ describe("Test Suite del camino Feliz", () => {
     //Type Apellido
     paginaTitulares.elements.inputApellido().type(this.credenciales.apellido);
 
-    paginaTitulares.elements
-      .inputTelefono()
-      .type(Cypress.env("USER_TELEFONO"), {
-        log: false,
-      });
-    paginaTitulares.elements.inputMail().type(Cypress.env("USER_MAIL"), {
+    paginaTitulares.elements.inputTelefono().type(userTelefono, {
+      log: false,
+    });
+
+    paginaTitulares.elements.inputMail().type(userEmail, {
       log: false,
     });
 
@@ -155,9 +154,7 @@ describe("Test Suite del camino Feliz", () => {
     cy.location("pathname").should("contains", "human/third_party_accounts");
 
     //CBU
-    cy.get(".MuiGrid-grid-md-8")
-      .click()
-      .type(Cypress.env("USER_CBU"), { log: false });
+    cy.get(".MuiGrid-grid-md-8").click().type(userCbu, { log: false });
 
     //Banco
     cy.get(".MuiDialogActions-root > .MuiButton-contained").click();
