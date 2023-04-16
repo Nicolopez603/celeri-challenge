@@ -3,13 +3,7 @@ import paginaPrincipal from "../../support/pages/paginaPrincipal";
 import paginaHumana from "../../support/pages/paginaHumana";
 import paginaTitulares from "../../support/pages/paginaTitulares";
 
-const userEmail = Cypress.config("env").USER_MAIL;
-const userDni = Cypress.config("env").USER_DNI;
-const userCuit = Cypress.config("env").USER_CUIT;
-const userTelefono = Cypress.config("env").USER_TELEFONO;
-const userCbu = Cypress.config("env").USER_CBU;
-
-describe("Test Suite del camino Feliz", () => {
+describe("Test Camino Feliz", () => {
   beforeEach(function () {
     cy.visit("/");
     cy.location("protocol").should("contains", "https");
@@ -21,7 +15,6 @@ describe("Test Suite del camino Feliz", () => {
   it("Validamos que los elementos principales sean visibles", function () {
     //Primera Pagina
     paginaPrincipal.elements.botonHumana().click();
-
     cy.location("pathname").should("contains", "/human");
 
     //Segunda Pagina
@@ -30,121 +23,78 @@ describe("Test Suite del camino Feliz", () => {
 
     //Tercera Pagina
 
-    paginaTitulares.elements.inputDni().type(userDni, {
+    paginaTitulares.elements.inputDni().type("42028075", {
+      log: false,
+    });
+    paginaTitulares.elements.inputCuit().type("20-42028075-1", {
       log: false,
     });
 
-    paginaTitulares.elements.inputCuit().type(userCuit, {
-      log: false,
-    });
-
-    //Type Nombre
     paginaTitulares.elements.inputPrimerNombre().type(this.credenciales.nombre);
 
-    //Type Segundo Nombre
     paginaTitulares.elements
       .inputSegundoNombre()
       .type(this.credenciales.segundoNombre);
 
-    //Type Apellido
     paginaTitulares.elements.inputApellido().type(this.credenciales.apellido);
 
-    paginaTitulares.elements.inputTelefono().type(userTelefono, {
+    paginaTitulares.elements.inputTelefono().type("2216790726", {
       log: false,
     });
 
-    paginaTitulares.elements.inputMail().type(userEmail, {
+    paginaTitulares.elements.inputMail().type("nicomlopez33@gmail.com", {
       log: false,
     });
 
-    //Checkbox PoliticamenteExpuesta
     paginaTitulares.elements
       .checkBoxPoliticamenteExpuesta()
       .check()
       .should("be.checked");
 
-    //Residente Fiscal de los EEUU
     paginaTitulares.elements
       .checkBoxResidenteFiscalUSA()
       .check()
       .should("be.checked");
 
-    //Checkbox Sujeto Obligado
     paginaTitulares.elements
       .checkBoxSujetoObligado()
       .check()
       .should("be.checked");
 
-    //cy.step('Ingresamos codigo postal, ciudad y cireccion de calle')
     paginaTitulares.elements
       .inputCodigoPostal()
       .type(this.credenciales.codigoPostal);
+
     paginaTitulares.elements.inputCiudad().type(this.credenciales.ciudad);
+
     paginaTitulares.elements
       .inputDireccionCalle()
       .type(this.credenciales.direccionCalle);
 
-    //Genero
-    cy.get(
-      ":nth-child(9) > .flex > .MuiAutocomplete-root > .MuiFormControl-root > .MuiOutlinedInput-root"
-    ).type("Masculino");
+    paginaTitulares.elements.inputGenero().type(this.credenciales.genero);
 
-    // Selecciona y hace clic en la primera opción del dropdown
-    cy.get(
-      ".MuiAutocomplete-popper .MuiAutocomplete-listbox > :first-child"
-    ).click();
+    paginaTitulares.elements.primerElementoDropdown().click();
 
-    //Estado civil
-    cy.get(
-      ":nth-child(10) > .flex > .MuiAutocomplete-root > .MuiFormControl-root > .MuiOutlinedInput-root"
-    ).type("Soltero");
+    paginaTitulares.elements
+      .inputEstadoCivil()
+      .type(this.credenciales.estadoCivil);
+    paginaTitulares.elements.primerElementoDropdown().click();
 
-    cy.get(
-      ".MuiAutocomplete-popper .MuiAutocomplete-listbox > :first-child"
-    ).click();
+    paginaTitulares.elements.inputPais().type(this.credenciales.pais);
+    paginaTitulares.elements.primerElementoDropdown().click();
 
-    //Pais
-    cy.get(
-      ":nth-child(3) > .mb-16 > :nth-child(2) > .MuiGrid-container > :nth-child(1) > .flex > .MuiAutocomplete-root > .MuiFormControl-root > .MuiOutlinedInput-root"
-    ).type("Argentina");
+    paginaTitulares.elements.inputProvincia().type(this.credenciales.provincia);
+    paginaTitulares.elements.primerElementoDropdown().click();
 
-    cy.get(
-      ".MuiAutocomplete-popper .MuiAutocomplete-listbox > :first-child"
-    ).click();
+    paginaTitulares.elements.inputLocalidad().type(this.credenciales.ciudad);
+    paginaTitulares.elements.primerElementoDropdown().click();
 
-    //Provincia - Estado
-    cy.get(
-      ":nth-child(2) > .flex > .MuiAutocomplete-root > .MuiFormControl-root > .MuiOutlinedInput-root"
-    ).type("Buenos aires");
+    paginaTitulares.elements
+      .inputActividadEconomica()
+      .type(this.credenciales.actividadEconomica);
+    paginaTitulares.elements.primerElementoDropdown().click();
 
-    cy.get(
-      ".MuiAutocomplete-popper .MuiAutocomplete-listbox > :first-child"
-    ).click();
-
-    //Localidad
-
-    cy.get(
-      ":nth-child(3) > .mb-16 > :nth-child(2) > .MuiGrid-container > :nth-child(3) > .flex > .MuiAutocomplete-root > .MuiFormControl-root > .MuiOutlinedInput-root"
-    ).type("LA PLATA");
-
-    cy.get(
-      ".MuiAutocomplete-popper .MuiAutocomplete-listbox > :first-child"
-    ).click();
-
-    //Actividad economica
-    cy.get(
-      ":nth-child(4) > :nth-child(2) > .MuiGrid-container > .MuiGrid-root > .flex > .MuiAutocomplete-root > .MuiFormControl-root > .MuiOutlinedInput-root"
-    ).type("Venta al por mayor de azúcar");
-
-    cy.wait(500);
-
-    cy.get(
-      ".MuiAutocomplete-popper .MuiAutocomplete-listbox > :first-child"
-    ).click();
-
-    //Boton continuar
-
-    cy.get(".justify-end > .MuiButton-contained").click();
+    paginaTitulares.elements.botonContinuar().click();
     cy.location("pathname").should("contains", "/human");
 
     //Cuarta Pagina
@@ -154,7 +104,7 @@ describe("Test Suite del camino Feliz", () => {
     cy.location("pathname").should("contains", "human/third_party_accounts");
 
     //CBU
-    cy.get(".MuiGrid-grid-md-8").click().type(userCbu, { log: false });
+    cy.get(".MuiGrid-grid-md-8").click().type(this.credenciales.cbu);
 
     //Banco
     cy.get(".MuiDialogActions-root > .MuiButton-contained").click();

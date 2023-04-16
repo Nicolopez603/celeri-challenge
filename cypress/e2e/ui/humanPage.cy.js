@@ -2,7 +2,7 @@
 
 import paginaHumana from "../../support/pages/paginaHumana";
 
-describe("Test Suit de la pagina Humana", () => {
+describe("Test Suite de la pagina Humana", () => {
   beforeEach(function () {
     cy.visit("/human");
     cy.location("protocol").should("contains", "https");

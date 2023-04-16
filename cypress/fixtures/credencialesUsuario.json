@@ -4,5 +4,12 @@
   "apellido": "Lopez",
   "codigoPostal": "1900",
   "ciudad": "La Plata",
-  "direccionCalle": "155"
+  "provincia": "Buenos aires",
+  "pais": "Argentina",
+  "direccionCalle": "155",
+  "genero": "Masculino",
+  "estadoCivil": "Soltero",
+  "cbu": "4530000800015010235856",
+  "actividadEconomica": "Venta al por mayor de azúcar"
+  
 }

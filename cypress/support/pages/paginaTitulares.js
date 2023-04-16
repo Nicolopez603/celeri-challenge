@@ -16,6 +16,31 @@ class paginaTitulares {
     checkBoxResidenteFiscalUSA: () =>
       cy.get('[name="es_fatca"][value="false"]'),
     checkBoxSujetoObligado: () => cy.get('[name="es_soi"][value="false"]'),
+    inputEstadoCivil: () =>
+      cy.get(
+        ":nth-child(10) > .flex > .MuiAutocomplete-root > .MuiFormControl-root > .MuiOutlinedInput-root"
+      ),
+    inputGenero: () =>
+      cy.get(
+        ":nth-child(9) > .flex > .MuiAutocomplete-root > .MuiFormControl-root > .MuiOutlinedInput-root"
+      ),
+    inputPais: () =>
+      cy.get(
+        ":nth-child(3) > .mb-16 > :nth-child(2) > .MuiGrid-container > :nth-child(1) > .flex > .MuiAutocomplete-root > .MuiFormControl-root > .MuiOutlinedInput-root"
+      ),
+    inputProvincia: () =>
+      cy.get(
+        ":nth-child(2) > .flex > .MuiAutocomplete-root > .MuiFormControl-root > .MuiOutlinedInput-root"
+      ),
+    inputLocalidad: () =>
+    cy.get(':nth-child(3) > .mb-16 > :nth-child(2) > .MuiGrid-container > :nth-child(3) > .flex > .MuiAutocomplete-root > .MuiFormControl-root > .MuiOutlinedInput-root'),
+    inputActividadEconomica: () =>
+      cy.get(
+        ":nth-child(4) > :nth-child(2) > .MuiGrid-container > .MuiGrid-root > .flex > .MuiAutocomplete-root > .MuiFormControl-root > .MuiOutlinedInput-root"
+      ),
+    botonContinuar: () => cy.get(".justify-end > .MuiButton-contained"),
+    primerElementoDropdown: () =>
+      cy.get(".MuiAutocomplete-popper .MuiAutocomplete-listbox > :first-child"),
   };
 }
 
