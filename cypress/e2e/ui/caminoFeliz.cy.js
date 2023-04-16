@@ -3,6 +3,12 @@ import paginaPrincipal from "../../support/pages/paginaPrincipal";
 import paginaHumana from "../../support/pages/paginaHumana";
 import paginaTitulares from "../../support/pages/paginaTitulares";
 
+const userEmail = Cypress.env("USER_MAIL");
+const userDni = Cypress.env("USER_DNI");
+const userCuit = Cypress.env("USER_CUIT");
+const userTelefono = Cypress.env("USER_TELEFONO");
+const userCbu = Cypress.env("USER_CBU");
+
 describe("Test Suite del camino Feliz", () => {
   beforeEach(function () {
     cy.visit("/");
@@ -24,11 +30,11 @@ describe("Test Suite del camino Feliz", () => {
 
     //Tercera Pagina
 
-    paginaTitulares.elements.inputDni().type(Cypress.env("user_dni"), {
+    paginaTitulares.elements.inputDni().type(Cypress.env("USER_DNI"), {
       log: false,
     });
 
-    paginaTitulares.elements.inputCuit().type(Cypress.env("user_cuit"), {
+    paginaTitulares.elements.inputCuit().type(Cypress.env("USER_CUIT"), {
       log: false,
     });
 
@@ -45,15 +51,16 @@ describe("Test Suite del camino Feliz", () => {
 
     paginaTitulares.elements
       .inputTelefono()
-      .type(Cypress.env("user_telefono"), {
+      .type(Cypress.env("USER_TELEFONO"), {
         log: false,
       });
-    paginaTitulares.elements.inputMail().type(Cypress.env("user_mail"), {
+    paginaTitulares.elements.inputMail().type(Cypress.env("USER_MAIL"), {
       log: false,
     });
 
     //Checkbox PoliticamenteExpuesta
-    paginaTitulares.elements.checkBoxPoliticamenteExpuesta()
+    paginaTitulares.elements
+      .checkBoxPoliticamenteExpuesta()
       .check()
       .should("be.checked");
 
@@ -150,7 +157,7 @@ describe("Test Suite del camino Feliz", () => {
     //CBU
     cy.get(".MuiGrid-grid-md-8")
       .click()
-      .type(Cypress.env("user_cbu"), { log: false });
+      .type(Cypress.env("USER_CBU"), { log: false });
 
     //Banco
     cy.get(".MuiDialogActions-root > .MuiButton-contained").click();

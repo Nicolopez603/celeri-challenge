@@ -16,6 +16,12 @@ jobs:
               uses: cypress-io/github-action@v5
               with:
                   command: npm run ui-regression
+              env:
+                  USER_MAIL: ${{ secrets.USER_MAIL }}
+                  USER_DNI: ${{ secrets.USER_DNI }}
+                  USER_CUIT: ${{ secrets.USER_CUIT }}
+                  USER_TELEFONO: ${{ secrets.USER_TELEFONO }}
+                  USER_CBU: ${{ secrets.USER_CBU }}
             - name: Uploading Artifact
               uses: actions/upload-artifact@v3
               if: always()
