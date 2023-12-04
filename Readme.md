@@ -1,10 +1,12 @@
 ## Challenge - Celeri
 
-# Challenge for membrane
+E2E library: Cypress 
+CI: Github Actions
 
-E2E library: Cypress
+## Technologies used: 
 
-## Technologies used: Language: Javascript - Node.js
+### Language: Javascript - Node.js
+### CI/CD: Github Actions
 
 All the test scenarios are located on feature files
 
