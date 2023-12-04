@@ -6,7 +6,7 @@ CI: Github Actions
 ## Technologies used: 
 
 ### Language: Javascript - Node.js
-### CI/CD: Github Actions
+### CI/CD: Github Actions - Slack (Slack notifications)
 
 All the test scenarios are located on feature files
 
